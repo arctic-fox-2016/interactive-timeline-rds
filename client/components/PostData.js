@@ -6,6 +6,7 @@ class PostData extends Component{
   constructor(props, context){
     super(props, context)
     this.state = {
+      recordId: this.props.data.id,
       picture: this.props.data.picture || '',
       name: this.props.data.name || '',
       postContent: this.props.data.post || '',
@@ -20,16 +21,17 @@ class PostData extends Component{
   handlePostKeyUp(e){
     if(e.key === 'Enter' && !e.shiftKey){
       this.setState({isUpdate: false})
+
+      var recordId = this.state.recordId
+      var postContent = this.state.postContent.trim()
+
+      if(!postContent) return
+      this.props.onEdit(recordId, postContent)
     }
   }
 
   handlePostUpdate(e){
     this.setState({isUpdate: true})
-    // var id = this.state.id
-    // var name = this.state.name.trim()
-    // var phone = this.state.phone.trim()
-    // if(!name || !phone) return
-    //this.props.onEdit(id, name, phone)
   }
 
   render(){

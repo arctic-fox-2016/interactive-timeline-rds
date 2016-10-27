@@ -4,8 +4,8 @@ export function addData(picture, name, post){
   return {type: types.ADD_DATA, picture, name, post}
 }
 
-export function editData(id, name, phone){
-  return {type: types.EDIT_DATA, id, name, phone}
+export function editData(id, post){
+  return {type: types.EDIT_DATA, id, post}
 }
 
 export function deleteData(id){
