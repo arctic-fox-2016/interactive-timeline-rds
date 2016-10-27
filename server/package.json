@@ -12,6 +12,8 @@
     "sequelize-cli": "^2.4.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "pg": "^6.1.0",
     "sequelize": "^3.24.6"
   }
 }
