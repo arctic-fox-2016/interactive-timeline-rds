@@ -7,9 +7,12 @@ class Comments extends Component{
 
   render(){
     const {data} = this.props
+    let styleList = {
+      backgroundColor:"#f2f4f7"
+    }
     return(
       <div>
-      {data.comment_id} || {data.comment}
+      <li className="list-group-item" style={styleList}>{data.comment}</li>
       </div>
     )
   }

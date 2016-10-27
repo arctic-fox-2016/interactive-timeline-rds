@@ -11,11 +11,17 @@ class ListComments extends Component {
     let listComments = data.list_of_comments.map(function(eachData){
       return <Comments key={eachData.comment_id} data={eachData}/>
     })
+    let listStyle = {
+      backgroundColor: "#c9d8ef"
+    }
 
     return(
-      <div>Saya List Comment <br />
+      <ul className="list-group">
       {listComments}
-      </div>
+      <form>
+        <li style={listStyle} className="list-group-item">New Comment<br /><br /><input className="form-control" placeholder="Comment" type = "text" /><br /><button type= "submit" className="btn btn-success">Save</button></li>
+      </form>
+      </ul>
     )
   }
 }

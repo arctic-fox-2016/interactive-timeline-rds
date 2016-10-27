@@ -10,8 +10,12 @@ class Posts extends Component {
     const {data} = this.props
 
     return(
-      <div>
-        <p>{data.post_id} || {data.post}</p>
+      <div className="panel panel-default">
+        <div className="panel-heading">POST CONTENT</div>
+        <div className="panel-body">
+          <p>{data.post}</p>
+        </div>
+
         <ListComments data={data}/>
       </div>
     )
