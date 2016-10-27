@@ -7,9 +7,14 @@ class ListComments extends Component {
   }
 
   render(){
+    const {data} = this.props
+    let listComments = data.list_of_comments.map(function(eachData){
+      return <Comments key={eachData.comment_id} data={eachData}/>
+    })
+
     return(
       <div>Saya List Comment <br />
-      <Comments />
+      {listComments}
       </div>
     )
   }

@@ -9,17 +9,22 @@ class ListPosts extends Component {
   }
 
   render(){
+    const {data} = this.props
+    let nodePost = data.map(function(eachData){
+      return <Posts key={eachData.post_id} data={eachData}/>
+    })
+
     return(
-      <div>List of Posts<br />
-        <Posts />
+      <div>
+        {nodePost}
       </div>
     )
   }
 }
 
 ListPosts.propTypes = {
-  data: PropTypes.array.isRequired,
-  actions: PropTypes.object
+  data: PropTypes.array.isRequired
+  // actions: PropTypes.object
 }
 
 function mapStateToProps(state){

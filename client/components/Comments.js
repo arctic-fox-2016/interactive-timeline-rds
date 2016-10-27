@@ -6,9 +6,10 @@ class Comments extends Component{
   }
 
   render(){
+    const {data} = this.props
     return(
       <div>
-      Saya Comment
+      {data.comment_id} || {data.comment}
       </div>
     )
   }

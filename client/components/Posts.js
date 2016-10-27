@@ -7,10 +7,12 @@ class Posts extends Component {
   }
 
   render(){
+    const {data} = this.props
+
     return(
       <div>
-        Saya Post
-        <ListComments />
+        <p>{data.post_id} || {data.post}</p>
+        <ListComments data={data}/>
       </div>
     )
   }
