@@ -18,7 +18,7 @@ class PostAdd extends Component{
     e.preventDefault()
     let picture = this.state.picture.trim()
     let name = this.state.name.trim()
-    let post = this.state.post.trim()
+    let post = this.state.post.replace(/\r\n|\r|\n/g,"<br />").trim()
 
     if(!picture && !name && !post) return
     this.props.onSave(picture, name, post)
