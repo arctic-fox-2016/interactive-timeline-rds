@@ -4,6 +4,19 @@ import Comments from './Comments.js'
 class ListComments extends Component {
   constructor(props, context){
     super(props, context)
+    this.state= {
+      newComment: ""
+    }
+  }
+
+  handleNewCommentBox(e){
+    this.setState({"newComment": e.target.value})
+  }
+
+  handleSubmitNewComment(e){
+    e.preventDefault()
+    this.props.actions.addComment(this.props.data.post_id, this.state.newComment)
+    this.setState({"newComment":""})
   }
 
   render(){
@@ -24,8 +37,8 @@ class ListComments extends Component {
     return(
       <ul className="list-group">
       {listComments}
-      <form>
-        <li style={listStyle} className="list-group-item">New Comment<br /><br /><input className="form-control" placeholder="Comment" type = "text" /><br /><button type= "submit" className="btn btn-success">Save</button></li>
+      <form onSubmit={this.handleSubmitNewComment.bind(this)}>
+        <li style={listStyle} className="list-group-item">New Comment<br /><br /><input className="form-control" value={this.state.newComment} onChange={this.handleNewCommentBox.bind(this)} placeholder="Comment" type = "text" /><br /><button type= "submit" className="btn btn-success">Save</button></li>
       </form>
       </ul>
     )

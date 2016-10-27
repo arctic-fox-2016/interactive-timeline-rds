@@ -19,13 +19,13 @@ class ListPosts extends Component {
   handleSubmitNewPost(e){
     e.preventDefault()
     this.props.actions.addPost(this.state.newPost)
-    this.setState("")
+    this.setState({"newPost":""})
   }
 
   render(){
-    const {data} = this.props
+    const {data,actions} = this.props
     let nodePost = data.map(function(eachData){
-      return <Posts key={eachData.post_id} data={eachData}/>
+      return <Posts key={eachData.post_id} data={eachData} actions={actions} />
     })
 
     let jumbotronStyle ={textAlign:"center", height: "100px"}

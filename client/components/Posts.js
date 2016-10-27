@@ -7,7 +7,7 @@ class Posts extends Component {
   }
 
   render(){
-    const {data} = this.props
+    const {data,actions} = this.props
 
     return(
       <div className="panel panel-default">
@@ -16,7 +16,7 @@ class Posts extends Component {
           <p>{data.post}</p>
         </div>
 
-        <ListComments data={data}/>
+        <ListComments data={data} actions={actions}/>
       </div>
     )
   }

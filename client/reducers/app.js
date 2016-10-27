@@ -40,6 +40,23 @@ export default function data(state = initialState, action){
     return newState
 
     case "ADD_COMMENT":
+    let newStateComment = state.map(function(eachState){
+      if(eachState.post_id == action.post_id){
+        if(eachState.list_of_comments){
+          let newCommentId = Math.max.apply(Math,eachState.list_of_comments.map(function(eachStateComment){
+            console.log("eachStateComment", eachStateComment)
+            return eachStateComment.comment_id
+          }))+1
+          eachState.list_of_comments.push({comment_id: newCommentId, comment: action.comment})
+        } else {
+          console.log(eachState)
+          eachState.list_of_comments = [{comment_id:1, comment: action.comment}]
+        }
+
+      }
+      return eachState
+    })
+    return newStateComment
 
     default:
     return state
