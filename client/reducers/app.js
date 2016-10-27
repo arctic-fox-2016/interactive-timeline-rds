@@ -26,5 +26,22 @@ const initialState = [
 ]
 
 export default function data(state = initialState, action){
-  return state
+  switch (action.type){
+    case "ADD_POST":
+    let newState = [
+      {
+        post_id: Math.max.apply(Math,state.map(function(eachState){
+          return eachState.post_id
+        }))+1,
+        post: action.post
+      },
+      ...state
+    ]
+    return newState
+
+    case "ADD_COMMENT":
+
+    default:
+    return state
+  }
 }
