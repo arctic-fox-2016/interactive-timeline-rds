@@ -1,4 +1,4 @@
-import {ADD_DATA, EDIT_DATA, DELETE_DATA} from '../constants/ActionTypes'
+import {ADD_DATA, EDIT_DATA, DELETE_DATA, ADD_COMMENT} from '../constants/ActionTypes'
 
 const initialState = [
   {
@@ -41,6 +41,42 @@ export default function data(state = initialState, action){
       return tempState
     case DELETE_DATA:
       return state.filter(data => data.id !== action.id)
+    case ADD_COMMENT:
+      let newState = state.map(function(postData){
+        if(action.id == postData.id){
+
+          if(postData.comment){
+            let newComment = postData.comment.map(function(commentData){
+              //console.log(commentData)
+              return [
+                {
+                  id: postData.comment.reduce((maxId, data) => Math.max(data.id, maxId), -1) + 1,
+                  picture: action.picture,
+                  name: action.name,
+                  post: action.post
+                },
+                ...postData.comment
+              ]
+            })
+            postData.comment = newComment[0]
+          } else {
+            postData.comment = [
+              {
+                id: 0,
+                picture: action.picture,
+                name: action.name,
+                post: action.post
+              }
+            ]
+          }
+
+          return postData
+        } else {
+          return postData
+        }
+      })
+
+      return newState
     default:
       return state
   }

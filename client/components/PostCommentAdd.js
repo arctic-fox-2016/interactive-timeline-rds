@@ -4,19 +4,26 @@ class PostCommentAdd extends Component{
   constructor(props, context){
     super(props, context)
     this.state = {
+      recordId: this.props.data.id,
+      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+      name: 'Sahbana Lubis',
       post: this.props.post || ''
     }
   }
 
-  handleNameChange(e){
+  handlePostChange(e){
     this.setState({post: e.target.value})
   }
 
   handleSubmit(e){
     e.preventDefault()
-    var post = this.state.post.trim()
+    let recordId = this.state.recordId
+    let picture = this.state.picture.trim()
+    let name = this.state.name.trim()
+    let post = this.state.post.replace(/\r\n|\r|\n/g,"<br />").trim()
 
-    if(!post || !phone) return
+    if(!picture && !name && !post) return
+    this.props.onSave(recordId, picture, name, post)
     this.setState({
       post: ''
     })
@@ -39,7 +46,7 @@ class PostCommentAdd extends Component{
       "padding": "10px 15px"
     }
     return(
-      <form className="form" style={formStyle}>
+      <form className="form" style={formStyle} onSubmit={this.handleSubmit.bind(this)}>
         <div className="media">
           <div className="media-left">
             <a><img className="media-object" src={tempImage} style={imgStyle} /></a>
@@ -47,7 +54,7 @@ class PostCommentAdd extends Component{
           <div className="media-body media-middle">
             <div className="row">
               <div className="col-xs-8">
-                <input type="text" className="form-control" placeholder="Comment..."></input>
+                <input type="text" className="form-control" placeholder="Comment..." onChange={this.handlePostChange.bind(this)} value={this.state.post}></input>
               </div>
               <div className="col-xs-4">
                 <input type="submit" className="btn btn-block btn-info" value="Comment" />
@@ -61,7 +68,12 @@ class PostCommentAdd extends Component{
 }
 
 PostCommentAdd.propTypes = {
-  post: PropTypes.string
+  post: PropTypes.string,
+  onSave: PropTypes.func.isRequired
 }
+
+// PostCommentAdd.propTypes = {
+//   post: PropTypes.string
+// }
 
 export default PostCommentAdd

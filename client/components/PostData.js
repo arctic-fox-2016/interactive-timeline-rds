@@ -33,14 +33,14 @@ class PostData extends Component{
   }
 
   render(){
-    const {data, actions, deleteData} = this.props
+    const {data, actions} = this.props
 
     let commentData = null
     if(data.comment){
       if(data.comment.length > 0){
         commentData = data.comment.map(function(data){
           return (
-            <PostComment key={data.id} data={data} {...actions} />
+            <PostComment key={data.id} data={data} actions={actions} />
           )
         })
       }
@@ -74,7 +74,6 @@ class PostData extends Component{
     let dropdownItemStyle = {
       "padding": "5px 10px"
     }
-    //let postInput = { __html: this.state.postContent.replace(/<br\s?\/?>/g, '<br />') }
     let postPrint = { __html: this.state.postContent }
 
     let postBlock = null
@@ -92,7 +91,7 @@ class PostData extends Component{
           </a>
           <ul className="dropdown-menu" style={dropdownWrapperStyle}>
             <li><a href="javascript:void(0)" style={dropdownItemStyle} onClick={this.handlePostUpdate.bind(this)}>Edit</a></li>
-            <li><a href="javascript:void(0)" style={dropdownItemStyle} onClick={() => deleteData(data.id)}>Delete</a></li>
+            <li><a href="javascript:void(0)" style={dropdownItemStyle} onClick={() => actions.deleteData(data.id)}>Delete</a></li>
           </ul>
         </div>
         <div className="media">
@@ -105,7 +104,7 @@ class PostData extends Component{
             {commentData}
           </div>
         </div>
-        <PostCommentAdd />
+        <PostCommentAdd data={data} onSave={actions.addComment} />
       </li>
     )
   }
@@ -113,7 +112,7 @@ class PostData extends Component{
 
 PostData.propTypes = {
   data: PropTypes.object.isRequired,
-  deleteData: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 }
 
 export default PostData

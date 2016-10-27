@@ -13,7 +13,7 @@ class ListItem extends Component{
     if(data.length > 0){
       nodeData = data.map(function(data){
         return (
-          <PostData key={data.id} data={data} {...actions} />
+          <PostData key={data.id} data={data} actions={actions} />
         )
       })
     }
