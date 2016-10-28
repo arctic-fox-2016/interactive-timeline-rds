@@ -22,8 +22,8 @@ class ListComments extends Component {
   render(){
     const {data} = this.props
     let listComments
-    if(data.list_of_comments){
-      listComments = data.list_of_comments.map(function(eachData){
+    if(data.Comments){
+      listComments = data.Comments.map(function(eachData){
         return <Comments key={eachData.comment_id} data={eachData}/>
       })
     } else {

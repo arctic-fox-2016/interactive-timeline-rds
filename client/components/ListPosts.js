@@ -12,6 +12,10 @@ class ListPosts extends Component {
     }
   }
 
+  componentDidMount(){
+    this.props.actions.loadPost()
+  }
+
   handleNewPostBox(e){
     this.setState({"newPost": e.target.value})
   }

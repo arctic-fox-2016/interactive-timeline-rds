@@ -3,21 +3,19 @@ let app = express()
 let port = 8000
 let model = require("./models/index")
 let bodyParser = require('body-parser')
+let cors = require('cors')
 
 app.use(bodyParser())
+app.use(cors())
 
-app.get('/posts', function(req,res,next){
-  model.Post.findAll({include: [{
+app.get('/', function(req,res,next){
+  model.Post.findAll({attributes:[['id','post_id'], 'post'],include: [{
     model: model.Comment,
+    attributes: [['id','comment_id'], 'comment'],
   }]}).then(function(allPosts){
-    res.json({message:"berhasil", data: allPosts})
+    res.json(allPosts)
   })
-})
 
-app.get('/comments', function(req,res,next){
-  model.Comment.findAll().then(function(allComments){
-    res.json({message:"berhasil", data: allComments})
-  })
 })
 
 app.post('/posts', function(req,res,next){
