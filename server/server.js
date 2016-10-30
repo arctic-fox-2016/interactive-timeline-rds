@@ -19,13 +19,15 @@ app.get('/', function(req,res,next){
 })
 
 app.post('/posts', function(req,res,next){
-  model.Post.create({post: req.body.post})
-  res.send('berhasil')
+  model.Post.create({post: req.body.post}).then(function(post){
+    res.json(post)
+  })
 })
 
 app.post('/comments', function(req,res,next){
-  model.Comment.create({PostId: req.body.postid, comment: req.body.comment})
-  res.send('berhasil')
+  model.Comment.create({PostId: req.body.postid, comment: req.body.comment}).then(function(comment){
+    res.json(comment)
+  })
 })
 
 app.get('/delete', function(req,res,next){

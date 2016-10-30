@@ -30,6 +30,28 @@ export function loadPost(){
   }
 }
 
+export function addData(post){
+  console.log('masuk addData')
+  return dispatch => {
+    dispatch(addPost(post))
+    return request.post(`${SERVER_URL}posts`).type('form').send({post:post}).end((err,res)=>{
+      if(err){
+        dispatch(addPostFailure())
+      } else {
+        dispatch(addPostSuccess(res.body))
+      }
+    })
+  }
+}
+
+export function addPostSuccess(post){
+  return {type: types.ADD_POST_SUCCESS, post}
+}
+
+export function addPostFailure(){
+  return {type: types.ADD_POST_FAILURE}
+}
+
 export function loadPostsFailure(){
   return {type:types.LOAD_POST_FAILURE}
 }

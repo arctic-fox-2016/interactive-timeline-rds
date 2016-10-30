@@ -22,7 +22,7 @@ class ListPosts extends Component {
 
   handleSubmitNewPost(e){
     e.preventDefault()
-    this.props.actions.addPost(this.state.newPost)
+    this.props.actions.addData(this.state.newPost)
     this.setState({"newPost":""})
   }
 

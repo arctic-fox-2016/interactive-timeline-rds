@@ -6,18 +6,32 @@ export default function data(state = initialState, action){
     return []
 
     case "LOAD_POST_SUCCESS":
-    console.log(action)
     return action.posts
+
+    case "ADD_POST_SUCCESS":
+    console.log("masuk")
+    let posts = state
+    let idObject = posts.map(function(x){
+      return x.post_id
+    }).indexOf(parseInt(action.post_id))
+    if(idObject > -1){
+      console.log('masuk temu')
+      return state
+    } else {
+      console.log('masuk tak temu')
+      console.log(state)
+      return [...state, action.post]
+    }
 
     case "ADD_POST":
     let newState = [
+      ...state,
       {
         post_id: Math.max.apply(Math,state.map(function(eachState){
           return eachState.post_id
         }))+1,
         post: action.post
-      },
-      ...state
+      }
     ]
     return newState
 
@@ -34,7 +48,6 @@ export default function data(state = initialState, action){
           console.log(eachState)
           eachState.list_of_comments = [{comment_id:1, comment: action.comment}]
         }
-
       }
       return eachState
     })
